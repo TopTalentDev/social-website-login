@@ -10,6 +10,8 @@
   </head>
   <body>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v15.0&appId=3221733798089215&autoLogAppEvents=1"
+      crossorigin="anonymous" async defer></script>
     <script>
       
       function handleCredentialResponse(response) {
@@ -41,5 +43,15 @@
 
     </script>
     <div id="buttonDiv"></div>
+    <div id="fb-root"></div>
+    <div
+      class="fb-login-button"
+      data-width=""
+      data-size="large"
+      data-button-type="continue_with"
+      data-layout="default"
+      data-auto-logout-link="false "
+      data-use-continue-as="false"
+    ></div>
   </body>
 </html>
