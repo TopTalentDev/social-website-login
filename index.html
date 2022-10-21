@@ -45,10 +45,20 @@
     <!-- Facebook Login -->
     <script>
       function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
-        console.log('statusChangeCallback');
         console.log(response);                   // The current login status of the person.
         if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-          console.log("Hello world")
+          fetch("/api/auth/facebook", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ code: response.authResponse.accessToken }),
+          })
+          .then((res) => res.json())
+          .then((data) => {
+            // User Info
+            console.log(data)
+          });
         }
       }
       
