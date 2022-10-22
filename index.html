@@ -6,12 +6,17 @@
     <title>Google Login</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/4.12.0/bootstrap-social.min.css" />
+
   </head>
   <body>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script async defer src="https://accounts.google.com/gsi/client"></script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-
+    
+    <script async defer src="https://cdn.jsdelivr.net/gh/oauth-io/oauth-js@c5af4519/dist/oauth.js"></script>
     <!-- Google Login -->
     <script>      
       function handleCredentialResponse(response) {
@@ -36,8 +41,9 @@
           callback: handleCredentialResponse,
         });
         google.accounts.id.renderButton(document.getElementById("buttonDiv"), {
-          theme: "outline",
+          theme: "filled_black",
           size: "large",
+          type: "icon",
         });
       };
     </script>
@@ -82,7 +88,38 @@
       };
     </script>
 
+    <script>
+      function twitterLogin() {
+        // Initialize with your OAuth.io app public key
+        OAuth.initialize('daUxRnXEEijWd1sk5K01KtiuTdA');
+        // Use popup for OAuth
+        OAuth.popup('twitter').then(response => {
+          console.log('twitter:', response.oauth_token);
+          if (response.oauth_token) {   
+            fetch("/api/auth/twitter", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ code: response.oauth_token }),
+            })
+            .then((res) => res.json())
+            .then((data) => {
+              // User Info
+              console.log(data)
+            });
+          }
+        });
+      }
+    </script>
+
     <div id="buttonDiv"></div>
+
     <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+    
+    <a class="btn btn-social btn-twitter" onclick="twitterLogin()">
+      <i class="fa fa-twitter"></i> Sign in with Twitter
+    </a>
+
   </body>
 </html>
