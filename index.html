@@ -15,6 +15,7 @@
   <body>
     <script async defer src="https://accounts.google.com/gsi/client"></script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
     <!-- Google Login -->
     <script>      
       function handleCredentialResponse(response) {
@@ -86,6 +87,7 @@
       };
     </script>
 
+    <!-- Twitter Login -->
     <script>
       function twitterLogin() {
         fetch("/api/auth/twitter", {
@@ -96,6 +98,8 @@
       }
     </script>
 
+    <!-- Apple Login -->
+    
     <div id="buttonDiv"></div>
 
     <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
