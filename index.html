@@ -15,8 +15,6 @@
   <body>
     <script async defer src="https://accounts.google.com/gsi/client"></script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-    
-    <script async defer src="https://cdn.jsdelivr.net/gh/oauth-io/oauth-js@c5af4519/dist/oauth.js"></script>
     <!-- Google Login -->
     <script>      
       function handleCredentialResponse(response) {
@@ -90,26 +88,11 @@
 
     <script>
       function twitterLogin() {
-        // Initialize with your OAuth.io app public key
-        OAuth.initialize('daUxRnXEEijWd1sk5K01KtiuTdA');
-        // Use popup for OAuth
-        OAuth.popup('twitter').then(response => {
-          console.log('twitter:', response.oauth_token);
-          if (response.oauth_token) {   
-            fetch("/api/auth/twitter", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ code: response.oauth_token }),
-            })
-            .then((res) => res.json())
-            .then((data) => {
-              // User Info
-              console.log(data)
-            });
-          }
-        });
+        fetch("/api/auth/twitter", {
+          method: "POST",
+        })
+          .then(res => res.json())
+          .then(data => location.href = data.url)
       }
     </script>
 
