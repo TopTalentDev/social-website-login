@@ -19,6 +19,6 @@
     "express": "^4.17.1",
     "google-auth-library": "^5.2.2",
     "node-fb-login": "^1.0.0",
-    "oauth": "^0.10.0"
+    "request": "^2.88.2"
   }
 }
