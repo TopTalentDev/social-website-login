@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post('/google', authController.glogin);
 router.post('/facebook', authController.flogin);
-router.post('/twitter', authController.tlogin);
+router.post('/twitter', authController.getTwitterLoginUrl);
 
 module.exports = router;
